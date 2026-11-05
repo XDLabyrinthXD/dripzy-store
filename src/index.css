@@ -75,14 +75,92 @@
 }
 
 .animate-shimmer {
+  display: inline-block;
   background: linear-gradient(
     90deg,
-    transparent 0%,
-    rgba(168, 85, 247, 0.08) 50%,
-    transparent 100%
+    #9333ea 0%,
+    #ec4899 50%,
+    #9333ea 100%
   );
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
+  background-size: 200% auto;
+  color: #9333ea;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Toast notification */
+@keyframes toast-slide-down {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -100%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes toast-fade-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -100%);
+  }
+}
+
+.whatsapp-toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 9999;
+  background: rgba(15, 15, 15, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: toast-slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: none;
+}
+
+.whatsapp-toast.fade-out {
+  animation: toast-fade-out 0.35s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.whatsapp-toast .toast-icon {
+  width: 20px;
+  height: 20px;
+  color: #25D366;
+  flex-shrink: 0;
+}
+
+.whatsapp-toast .toast-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #25D366;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .animate-float {

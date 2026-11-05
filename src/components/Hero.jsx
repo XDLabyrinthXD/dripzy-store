@@ -38,7 +38,7 @@ export default function Hero() {
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
               Elevate Your{' '}
-              <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-clip-text text-transparent bg-[length:200%_auto] animate-shimmer">
+              <span className="animate-shimmer">
                 Style
               </span>
               <br />

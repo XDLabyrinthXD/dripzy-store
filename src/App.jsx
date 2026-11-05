@@ -25,7 +25,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white relative">
       <Navbar
-        onCartOpen={() => setCartOpen(true)}
         onSearch={handleSearch}
       />
       <Hero />

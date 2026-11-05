@@ -1,17 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Search, Menu, X, User, LogOut, Phone } from 'lucide-react';
-import { useCart } from '../context/CartContext';
+import { Search, Menu, X, User, LogOut, Phone } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import WhatsAppIcon from './icons/WhatsAppIcon';
 
-export default function Navbar({ onCartOpen, onSearch }) {
+export default function Navbar({ onSearch }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const { totalItems } = useCart();
   const { user, signInWithGoogle, logout } = useAuth();
   const searchInputRef = useRef(null);
   const userMenuRef = useRef(null);
@@ -156,27 +154,6 @@ export default function Navbar({ onCartOpen, onSearch }) {
                 </button>
               )}
             </AnimatePresence>
-
-            {/* Cart */}
-            <button
-              onClick={onCartOpen}
-              className="relative p-2 rounded-full hover:bg-gray-100 transition-colors"
-              aria-label="Cart"
-            >
-              <ShoppingCart className="w-5 h-5 text-gray-600" />
-              <AnimatePresence>
-                {totalItems > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    exit={{ scale: 0 }}
-                    className="absolute -top-0.5 -right-0.5 bg-purple-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold"
-                  >
-                    {totalItems}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
 
             {/* Auth */}
             {user ? (
