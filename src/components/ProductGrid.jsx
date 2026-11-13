@@ -1,8 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SlidersHorizontal, ChevronDown, Grid3X3, LayoutGrid } from 'lucide-react';
+import { SlidersHorizontal, ChevronDown } from 'lucide-react';
 import ProductCard from './ProductCard';
-import watches, { categories } from '../data/products';
+import { fetchProducts } from '../data/products';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const sortOptions = [
@@ -13,10 +13,25 @@ const sortOptions = [
 ];
 
 export default function ProductGrid({ searchQuery }) {
+  const [watches, setWatches] = useState([]);
+  const [categories, setCategories] = useState(['All']);
+  const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState('featured');
   const [sortOpen, setSortOpen] = useState(false);
   const [headerRef, headerVisible] = useScrollAnimation();
+
+  // Fetch products.json at runtime — always gets the latest version
+  useEffect(() => {
+    fetchProducts()
+      .then(({ watches: w, categories: c }) => {
+        setWatches(w ?? []);
+        setCategories(c ?? ['All']);
+      })
+      .catch((err) => setFetchError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
 
   const filteredAndSorted = useMemo(() => {
     let result = [...watches];
@@ -53,7 +68,36 @@ export default function ProductGrid({ searchQuery }) {
     }
 
     return result;
-  }, [activeCategory, sortBy, searchQuery]);
+  }, [watches, activeCategory, sortBy, searchQuery]);
+
+  // ── Loading skeleton ──────────────────────────────────────────
+  if (loading) {
+    return (
+      <section id="watches" className="py-16 sm:py-24 bg-gray-50/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center py-20">
+            <div className="text-5xl mb-4 animate-spin inline-block">⌚</div>
+            <p className="text-gray-500 mt-4">Loading collection…</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Fetch error ───────────────────────────────────────────────
+  if (fetchError) {
+    return (
+      <section id="watches" className="py-16 sm:py-24 bg-gray-50/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center py-20">
+            <div className="text-5xl mb-4">⚠️</div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">Could not load products</h3>
+            <p className="text-gray-500 text-sm">{fetchError}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="watches" className="py-16 sm:py-24 bg-gray-50/50">

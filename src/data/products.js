@@ -1,8 +1,10 @@
-// Product data — sourced from public/products.json (auto-managed by GitHub Actions pipeline)
-// Vite resolves /products.json at build time via the public folder.
-// The script scripts/auto-add-products.js writes directly to public/products.json.
+// Product data — fetched at runtime from /products.json (served from public/).
+// This means the browser always reads the latest version without a rebuild.
+// The GitHub Actions pipeline writes to public/products.json and Netlify redeploys.
 
-import data from '../../public/products.json';
-
-export const categories = data.categories;
-export default data.watches;
+/** @returns {Promise<{ watches: object[], categories: string[] }>} */
+export async function fetchProducts() {
+  const res = await fetch('/products.json');
+  if (!res.ok) throw new Error(`Failed to load products.json: ${res.status}`);
+  return res.json();
+}

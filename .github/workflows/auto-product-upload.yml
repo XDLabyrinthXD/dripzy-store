@@ -67,7 +67,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "🤖 Auto-added $(git diff --staged --name-only | grep 'images/products' | wc -l) new watch product(s) via Gemini Vision [skip ci]"
+            git commit -m "🤖 Auto-added $(git diff --staged --name-only | grep 'images/products' | wc -l) new watch product(s) via Gemini Vision"
             git push
             echo "✅ Successfully pushed updated products to main branch"
             echo "🚀 Netlify will now auto-deploy the updated store"
