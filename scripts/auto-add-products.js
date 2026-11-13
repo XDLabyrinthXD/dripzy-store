@@ -16,9 +16,14 @@
  * ─────────────────────────────────────────────────────────────────
  */
 
-const fs   = require('fs');
-const path = require('path');
-const https = require('https');
+import fs from 'fs';
+import path from 'path';
+import https from 'https';
+import { fileURLToPath } from 'url';
+
+// ESM equivalent of __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
 
 // ── Configuration ───────────────────────────────────────────────
 const ROOT          = path.resolve(__dirname, '..');
