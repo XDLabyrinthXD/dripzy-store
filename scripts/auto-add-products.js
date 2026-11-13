@@ -273,10 +273,8 @@ async function main() {
       // Don't stop — continue with next image
     }
 
-    // Rate limit: wait 2 seconds between API calls (free tier is 15 rpm)
-    if (i < files.length - 1) {
-      await sleep(2000);
-    }
+    // Rate limit: wait 3 seconds between every image (safe for bulk uploads of 15–20 on free tier)
+    await sleep(3000);
   }
 
   if (newProducts.length === 0) {

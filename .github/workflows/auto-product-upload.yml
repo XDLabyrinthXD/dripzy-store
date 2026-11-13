@@ -73,7 +73,12 @@ jobs:
             echo "🚀 Netlify will now auto-deploy the updated store"
           fi
 
-      # ── 6. Skip message if no images ────────────────────────────
+      # ── 6. Trigger Netlify deploy via Build Hook ─────────────────
+      - name: 🚀 Trigger Netlify Deploy
+        if: steps.check_images.outputs.image_count > 0
+        run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK }}
+
+      # ── 7. Skip message if no images ────────────────────────────
       - name: ℹ️ No New Images
         if: steps.check_images.outputs.image_count == 0
         run: echo "No new images found in public/uploads/new-watches/. Skipping product generation."
