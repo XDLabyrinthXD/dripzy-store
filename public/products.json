@@ -252,6 +252,39 @@
       "badge": "Exclusive",
       "description": "Featuring a striking two-tone Jubilee strap and bold black dial, this timepiece exudes unmatched sophistication. Perfect for elevating your everyday wear and formal evening occasions.",
       "isNew": true
+    },
+    {
+      "id": "auto-casio-g-shock-analog-digital-purple-edition-2499-1794589829350",
+      "name": "Casio G-Shock Neon Purple",
+      "category": "Casio Watches",
+      "price": 2499,
+      "originalPrice": 3499,
+      "image": "/images/products/1794589829350-casio-g-shock-analog-digital--purple-edition-2499.jpeg",
+      "badge": "Trending",
+      "description": "Featuring a durable resin strap and a striking purple abstract dial, this timepiece makes a bold statement. Perfect for adventurous outings and casual weekend wear.",
+      "isNew": true
+    },
+    {
+      "id": "auto-emporio-armani-gianni-t-bar-ladies-watch-with-white-dial-1999-1794589834139",
+      "name": "Emporio Armani Rose Pink Elegance",
+      "category": "Luxury Watches",
+      "price": 1999,
+      "originalPrice": 2799,
+      "image": "/images/products/1794589834139-emporio-armani-gianni-t-bar-ladies-watch-with-white-dial-1999.jpeg",
+      "badge": "Luxury",
+      "description": "Featuring a refined dual-tone metallic strap and a shimmering pink crystal-studded dial. Perfect for adding a touch of sophistication to your evening attire.",
+      "isNew": true
+    },
+    {
+      "id": "auto-fossil-automatic-2499-1794589840636",
+      "name": "Fossil Automatic Brown Leather Skeleton",
+      "category": "Skeleton Watches",
+      "price": 2499,
+      "originalPrice": 3499,
+      "image": "/images/products/1794589840636-fossil-automatic-2499.jpeg",
+      "badge": "Luxury",
+      "description": "Featuring a supple tan leather strap and a mesmerizing skeleton dial, this piece makes a striking statement. Perfect for sophisticated evening galas and formal wear.",
+      "isNew": true
     }
   ],
   "categories": [
