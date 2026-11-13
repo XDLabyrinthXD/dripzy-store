@@ -31,7 +31,7 @@ const UPLOAD_DIR    = path.join(ROOT, 'public', 'uploads', 'new-watches');
 const DEST_DIR      = path.join(ROOT, 'public', 'images', 'products');
 const PRODUCTS_JSON = path.join(ROOT, 'public', 'products.json');
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_MODEL  = 'gemini-2.0-flash-lite'; // free-tier model
+const GEMINI_MODEL  = 'gemini-3.5-flash-lite'; // free-tier model
 const SUPPORTED_EXT = ['.jpg', '.jpeg', '.png', '.webp'];
 
 // ── Helpers ─────────────────────────────────────────────────────
