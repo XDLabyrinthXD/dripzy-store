@@ -230,6 +230,28 @@
       "badge": "Luxury",
       "description": "Featuring a polished ceramic-finish steel strap and a mesmerizing skeleton dial, this masterpiece defines sophistication. Elevate your formal evenings with uncompromising elegance.",
       "isNew": true
+    },
+    {
+      "id": "auto-armani-heavystrap-2999-1794587640269",
+      "name": "Armani Two-Tone Skeleton Automatic",
+      "category": "Skeleton Watches",
+      "price": 2999,
+      "originalPrice": 4199,
+      "image": "/images/products/1794587640268-armani-heavystrap-2999.jpeg",
+      "badge": "Luxury",
+      "description": "Featuring a striking skeleton dial and a polished two-tone steel strap, this timepiece exudes refined sophistication. Perfect for elevating your evening wear or making a bold statement at formal occasions.",
+      "isNew": true
+    },
+    {
+      "id": "auto-rolex-gmt-master-2499-1794587647051",
+      "name": "Rolex GMT Master II Two-Tone",
+      "category": "Luxury Watches",
+      "price": 2499,
+      "originalPrice": 3499,
+      "image": "/images/products/1794587647051-rolex-gmt-master-2499.jpeg",
+      "badge": "Exclusive",
+      "description": "Featuring a striking two-tone Jubilee strap and bold black dial, this timepiece exudes unmatched sophistication. Perfect for elevating your everyday wear and formal evening occasions.",
+      "isNew": true
     }
   ],
   "categories": [
@@ -237,6 +259,7 @@
     "Skeleton Watches",
     "Cushion Watches",
     "Casio Watches",
-    "Samsung Galaxy Watches"
+    "Samsung Galaxy Watches",
+    "Luxury Watches"
   ]
 }
