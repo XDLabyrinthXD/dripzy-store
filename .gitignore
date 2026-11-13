@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Auto-upload pipeline — temp files
+public/uploads/new-watches/*.tmp
+
+# Keep the upload folder tracked but ignore large temp files

@@ -1,0 +1,79 @@
+name: 🤖 Auto Product Upload — Gemini Vision Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'public/uploads/new-watches/**'
+
+  # Allow manual trigger from GitHub Actions UI
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  auto-upload:
+    name: Analyze & Add Watch Products
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout the repository ──────────────────────────────
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 2. Setup Node.js ────────────────────────────────────────
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # ── 3. Check for new images ─────────────────────────────────
+      - name: 🔍 Check for New Watch Images
+        id: check_images
+        run: |
+          if [ -d "public/uploads/new-watches" ]; then
+            COUNT=$(find public/uploads/new-watches -maxdepth 1 -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" \) | wc -l)
+            echo "image_count=$COUNT" >> $GITHUB_OUTPUT
+            echo "Found $COUNT new image(s)"
+          else
+            echo "image_count=0" >> $GITHUB_OUTPUT
+            echo "Upload directory does not exist yet"
+          fi
+
+      # ── 4. Run the automation script ────────────────────────────
+      - name: 🤖 Run Gemini Auto-Product Script
+        if: steps.check_images.outputs.image_count > 0
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/auto-add-products.js
+
+      # ── 5. Commit and push changes ──────────────────────────────
+      - name: 📦 Commit Updated Products & Images
+        if: steps.check_images.outputs.image_count > 0
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add public/products.json
+          git add public/images/products/
+          git add public/uploads/new-watches/
+
+          # Only commit if there are actual changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "🤖 Auto-added $(git diff --staged --name-only | grep 'images/products' | wc -l) new watch product(s) via Gemini Vision [skip ci]"
+            git push
+            echo "✅ Successfully pushed updated products to main branch"
+            echo "🚀 Netlify will now auto-deploy the updated store"
+          fi
+
+      # ── 6. Skip message if no images ────────────────────────────
+      - name: ℹ️ No New Images
+        if: steps.check_images.outputs.image_count == 0
+        run: echo "No new images found in public/uploads/new-watches/. Skipping product generation."
